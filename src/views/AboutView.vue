@@ -1,45 +1,71 @@
 <script setup>
-function menuToggle(){
-    let nav = document.getElementById('nav');
-    let toggle = document.getElementById('toggle');
-    nav.classList.toggle("active")
-    toggle.classList.toggle("active")
-  };
-  function search(){
-    const icon = document.querySelector('.icon');
-    const search = document.querySelector('.search');
-    search.classList.toggle('active');
-    icon.classList.toggle('active');
-     } 
+import HeaderView from '../components/header/HeaderView.vue'
 </script>
 <template>
 <div class="About">
-  <header>
-    <div class="fullPageMenu" id="nav">
-      <nav class="nav">
-        <ul>
-          <li><a href="/" data-text="Главная">Главная</a></li>
-          <li><a href="about" data-text="Туры">Туры</a></li>
-          <li><a href="#" data-text="Памятники">Памятники</a></li>
-          <li><a href="#" data-text="Еда">Еда</a></li>
-          <li><a href="#" data-text="Контакты">Контакты</a></li>
-        </ul>
-      </nav>
-      <div class="banner">
-        <img src="../../public/imgnav/Turne.jpg" alt="">
-      </div>
-    </div>
-    <span class="menuicon" id="toggle" @click="menuToggle()"></span>
-    <div class="search" @click="search()">
-      <div class="icon"></div>
-      <div class="input">
-        <input type="text" placeholder="Type text..." id="mysearch">
-      </div>
-    </div>
-      </header>
+<HeaderView />
+
 </div>
 </template>
 
 <style>
+.card{
+  position: relative;
+  width: 256px;
+  height: 280px;
+  overflow: hidden;
+}
+.card .imBx,
+.card .contentBx
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.card .imBx img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.card .contentBx::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  transform: scaleY(0);
+  transition: transform 0.5s ease-in-out;
+  transform-origin: bottom;
+}
+.card:hover .contentBx::before{
+  transform: scaleY(1);
+  transition: transform 0.5s ease-in-out;
+  transform-origin: top;
+}
+.card .contentBx{
+display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
+}
+.card .contentBx .content{
+  position: relative;
+  padding: 30px;
+  z-index: 1;
+  transition: 0.5s;
+  transform: translateY(-300px);
+  transition-delay: 0s;
+}
+.card:hover .contentBx .content{
+transform: translateY(0px);
+transition-delay: 0.5s;
+}
 @import url('../assets/main.css');
 </style>
